@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Checker</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-center flex items-center justify-center">
+            <span class="mr-2">🎓</span> Grade Checker
+        </h2>
+
+        <div class="mb-4">
+            <label for="studentName" class="block text-gray-700 text-sm font-bold mb-2">Your Name:</label>
+            <input type="text" id="studentName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your name" >
+        </div>
+
+        <div class="mb-6">
+            <label for="studentScore" class="block text-gray-700 text-sm font-bold mb-2">Your Score:</label>
+            <input type="number" id="studentScore" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="0" max="100" placeholder="Enter your score" >
+        </div>
+
+        <button id="checkGradeBtn" class="rounded bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+            Check Grade
+        </button>
+
+        <div id="resultDisplay" class="mt-8 p-4 bg-gray-50 rounded-lg text-center hidden">
+            </div>
+    </div>
+
+    <script>
+        document.getElementById('checkGradeBtn').addEventListener('click', function() {
+            const studentName = document.getElementById('studentName').value;
+            const studentScore = parseInt(document.getElementById('studentScore').value);
+            const resultDisplay = document.getElementById('resultDisplay');
+
+            let grade = '';
+            let passFail = '';
+            let emoji = '';
+
+            if (studentScore >= 90 && studentScore <= 100) {
+                grade = 'A';
+                passFail = 'passed 🎉';
+                
+            } else if (studentScore >= 80 && studentScore <= 89) {
+                grade = 'B';
+                passFail = 'passed 🎉';
+                
+            } else if (studentScore >= 70 && studentScore <= 79) {
+                grade = 'C';
+                passFail = 'passed 🎉';
+                
+            } else if (studentScore >= 60 && studentScore <= 69) {
+                grade = 'D';
+                passFail = 'passed 🎉';
+                
+            } else if (studentScore >= 50 && studentScore <= 59) {
+                grade = 'E';
+                passFail = 'passed 🎉';
+                
+            } else if (studentScore < 50 && studentScore >= 0) {
+                grade = 'F';
+                passFail = 'failed 😔';
+                // emoji = '😔';
+            } else {
+                resultDisplay.innerHTML = `<p class="text-red-600">Please enter a valid score between 0 and 100.</p>`;
+                resultDisplay.classList.remove('hidden');
+                return; 
+            }
+
+            resultDisplay.innerHTML = `<p class="text-green-700">Hello ${studentName}! Your grade is <span class="font-bold">${grade}</span>. You ${passFail} the test. ${emoji}</p>`;
+            resultDisplay.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
